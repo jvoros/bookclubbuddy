@@ -11,12 +11,13 @@ const TestBook: IBook = {
     clubDate: new Date("01/01/2018"),
     pages: 352,
     title: "Catch22",
+    image: require("./assets/images/catch22.jpg"),
 };
 
 export default () => (
     <div>
         <Header
-            title="Bookclub Buddyxxxxxx"
+            title="Bookclub Buddy"
             subtitle="this is awesome"
         />
         <Bookcard
@@ -24,6 +25,3 @@ export default () => (
         />
     </div>
 );
-
-
-

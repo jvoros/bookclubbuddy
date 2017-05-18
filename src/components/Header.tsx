@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { colors } from "./Theme";
+import { colors, spacing } from "./Theme";
 
 interface IProps {
     title: string;
@@ -13,7 +13,7 @@ export default (props: IProps) => (
         <span className="subtitle">{ props.subtitle }</span>
         <style jsx>{`
             div {
-                padding: 5px;
+                padding: ${ spacing.padding };
                 background-color: ${ colors.primary };
                 color: ${ colors.primary_text };
             }
@@ -28,4 +28,3 @@ export default (props: IProps) => (
         `}</style>
     </div>
 );
-
