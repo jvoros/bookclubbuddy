@@ -1,7 +1,7 @@
 interface IBook {
     title: string;
     pages: number;
-    clubDate?: Date;
+    clubDate?: string;
     image?: string;
 }
 

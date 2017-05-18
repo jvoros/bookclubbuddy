@@ -1,42 +1,57 @@
+// Node modules
+import * as moment from "moment";
 import * as React from "react";
 
+// App components
+import BookDetail from "./BookDetail";
+import BookEdit from "./BookEdit";
 import { colors, spacing } from "./Theme";
 
+// TS types
 import IBook from "../types/book";
 
 interface IProps {
   book: IBook;
 }
 
-export default class BookCard extends React.PureComponent<IProps, ""> {
+interface IState {
+  editing: boolean;
+}
+
+export default class BookCard extends React.PureComponent<IProps, IState> {
 
   constructor(props) {
     super(props);
+    this.state = {
+      editing: false,
+    };
   }
 
-  public render() {
+  handleEdit = () => {
+    this.setState({ editing: true});
+  }
+
+  handleSave = () => {
+    this.setState({ editing: false});
+  }
+
+  render() {
     return (
-     <div className="card">
-       <img src={this.props.book.image} />
-       <h2>{this.props.book.title}</h2>
-
-       <style jsx>{`
-            .card {
-              margin: ${ spacing.margins };
-              padding: ${ spacing.padding };
-              border: 1px solid ${ colors.borders };
-              overflow: hidden;
-            }
-
-            img {
-              float: left;
-              width: 98px;
-              height: 150px;
-              margin-right: ${ spacing.margins };
-            }
-
-        `}</style>
-
+     <div>
+      { !this.state.editing &&
+      <BookDetail book={this.props.book} editPress={this.handleEdit} />
+      }
+      { this.state.editing &&
+      <BookEdit book={this.props.book} savePress={this.handleSave} />
+      }
+      <style jsx>{`
+        div {
+          margin: ${ spacing.margins };
+          padding: ${ spacing.padding };
+          border: 1px solid ${ colors.borders };
+          overflow: hidden;
+        }
+      `}</style>
     </div>
     );
   }
