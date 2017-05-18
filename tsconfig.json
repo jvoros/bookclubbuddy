@@ -5,9 +5,12 @@
         "noImplicitAny": false,
         "module": "commonjs",
         "target": "es2015",
-        "jsx": "react"
+        "jsx": "preserve"
     },
     "include": [
         "./src/**/*"
+    ],
+    "files": [
+        "./types/styled-jsx.d.ts"
     ]
 }

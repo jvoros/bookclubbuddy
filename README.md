@@ -1,1 +1,1 @@
-My beginner's typescript-react boilerplate.
+A simple web app to track the number of pages you have to read every day to finish your book in time for bookclub!

@@ -1,13 +1,17 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+// React
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
-import './index.html';
-import './assets/images/favicon.ico';
+// Static components
+import "normalize.css";
+import "./assets/images/favicon.ico";
+import "./index.html";
 
+// App components
+import App from "./App";
+
+// Render it
 ReactDOM.render(
-  <div>
-    <h1>Hello, world!</h1>
-    
-  </div>,
-  document.getElementById('root')
+  <App />,
+  document.getElementById("root"),
 );
