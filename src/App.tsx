@@ -48,6 +48,7 @@ export default class App extends React.Component<{store: BookStore}, IState> {
                     store={this.props.store}
                     book={this.state.modalBook}
                     close={this.handleModalClose}
+                    title="Add a Book"
                 />
                 }
                 <button onClick={this.handleAdd}>+ Add Book</button>

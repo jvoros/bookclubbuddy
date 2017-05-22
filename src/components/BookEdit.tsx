@@ -9,6 +9,7 @@ import { colors, spacing } from "./Theme";
 import { IBook } from "../types/interfaces";
 
 interface IProps {
+    title: string;
     store: BookStore;
     book: Book;
     close(): void;
@@ -43,7 +44,7 @@ export default class BookEdit extends React.Component<IProps, IState> {
 
     render() {
         return (
-           <Modal title="Add/Edit">
+           <Modal title={this.props.title}>
                 <form>
                     <label>title: </label>
                     <input type="text" name="title"

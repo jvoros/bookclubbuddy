@@ -39,6 +39,7 @@ export default class BookDetail extends React.Component<IProps, { modal?: boolea
                     <button onClick={this.toggleDeleteModal}>Delete</button>
                     { this.state.modal &&
                     <BookEdit
+                        title="Edit"
                         store={this.props.store}
                         book={this.props.book}
                         close={this.toggleModal}

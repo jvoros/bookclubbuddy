@@ -11,6 +11,10 @@ interface IProps {
 export default (props: IProps) => (
    <div className="fade">
         <div className="modal">
+            <div className="header">
+                <h1>{ props.title }</h1>
+                <h2>{ props.subtitle }</h2>
+            </div>
             { props.children }
         </div>
         <style jsx>{`
@@ -30,8 +34,8 @@ export default (props: IProps) => (
             background-color: white;
         }
 
-        input {
-            display: block;
+        .header {
+            border-bottom: 1px solid ${ colors.borders };
         }
     `}</style>
 </div>
