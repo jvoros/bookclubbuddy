@@ -1,60 +1,56 @@
+import { observer } from "mobx-react";
 import * as React from "react";
 
 // App components
-import BookCard from "./components/BookCard";
+import BookDetail from "./components/BookDetail";
+import BookEdit from "./components/BookEdit";
 import Header from "./components/Header";
+import Book from "./store/Book";
+import BookStore from "./store/BookStore";
 
-// TS types
-import IBook from "./types/book";
-
-const TestBook: IBook = {
-    clubDate: "06/01/2017",
-    pages: 352,
-    title: "Catch22",
-    image: require("./assets/images/catch22.jpg"),
-};
-
-const TestBook2: IBook = {
-    clubDate: "07/01/2017",
-    pages: 560,
-    title: "Fellowhsip of the Ring",
-    image: require("./assets/images/catch22.jpg"),
-};
-
-function guid() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-    s4() + '-' + s4() + s4() + s4();
+interface IState {
+    modal?: boolean;
+    modalBook?: Book;
 }
 
-// localStorage.setItem(guid(), JSON.stringify(TestBook));
-
-export default class App extends React.PureComponent<null, null> {
-
+@observer
+export default class App extends React.Component<{store: BookStore}, IState> {
     constructor(props) {
         super(props);
+        this.state = {
+            modal: false,
+        };
     }
 
-    componentDidMount() {
-        localStorage.clear();
-        localStorage.setItem(guid(), JSON.stringify(TestBook));
-        const keys = Object.keys(localStorage);
-        console.log(localStorage.getItem(keys[0]));
+    handleAdd = () => {
+        const newBook = new Book({ title: "New Book" });
+        this.setState({ modal: true, modalBook: newBook });
+    }
+
+    handleModalClose = () => {
+        this.setState({ modal: false });
     }
 
     render() {
+        const { books } = this.props.store;
+        const bookList = books.map((x) => (
+            <BookDetail key={x.id} book={x} store={this.props.store} />
+        ));
         return (
             <div>
                 <Header
                     title="Bookclub Buddy"
                     subtitle="this is awesome"
                 />
-                <BookCard book={ TestBook }/>
-                <BookCard book={ TestBook2 } />
+                {bookList}
+                { this.state.modal &&
+                <BookEdit
+                    store={this.props.store}
+                    book={this.state.modalBook}
+                    close={this.handleModalClose}
+                />
+                }
+                <button onClick={this.handleAdd}>+ Add Book</button>
             </div>
         );
     }

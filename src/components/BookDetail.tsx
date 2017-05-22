@@ -1,52 +1,68 @@
-import * as moment from "moment";
 import * as React from "react";
+
+import Book from "../store/Book";
+import BookStore from "../store/BookStore";
+import BookDelete from "./BookDelete";
+import BookEdit from "./BookEdit";
 
 import { colors, spacing } from "./Theme";
 
-import IBook from "../types/book";
-
 interface IProps {
-  book: IBook;
-  editPress(): any;
+    book: Book;
+    store: BookStore;
 }
 
-export default class BookDetail extends React.PureComponent<IProps, ""> {
+export default class BookDetail extends React.Component<IProps, { modal?: boolean; deleteModal?: boolean; }> {
+
     constructor(props) {
-    super(props);
-  }
+        super(props);
+        this.state = { modal: false };
+    }
 
-  getDaysLeft() {
-    const endDate = moment(this.props.book.clubDate, "MM/DD/YYYY");
-    return endDate.diff(moment(), "days");
-  }
+    toggleModal = () => {
+        this.setState({ modal: !this.state.modal });
+    }
 
-  getPPD() {
-    return Math.ceil(this.props.book.pages / this.getDaysLeft());
-  }
+    toggleDeleteModal = () => {
+        this.setState({ deleteModal: !this.state.deleteModal });
+    }
 
-  render() {
-    return (
-        <div>
-            <img src={this.props.book.image} />
-            <h2>{this.props.book.title}</h2>
-            <p>Bookclub {this.props.book.clubDate}</p>
-            <p><b>Days until book club:</b> {this.getDaysLeft()}</p>
-            <p><b>{this.getPPD()} pages per day to finish in time</b></p>
-            <button onClick={this.props.editPress}>Edit</button>
-            <style jsx>{`
-                h2 {
-                color: ${ colors.primary };
-                }
+    render() {
+        return (
+            <div className="wrap">
+                <img src={this.props.book.image} />
+                <div className="details">
+                    <h1>{this.props.book.title}</h1>
+                    <p><b>{this.props.book.clubDate}</b></p>
+                    <p><b>{this.props.book.ppd}</b> pages per day</p>
+                    <button onClick={this.toggleModal}>Edit</button>
+                    <button onClick={this.toggleDeleteModal}>Delete</button>
+                    { this.state.modal &&
+                    <BookEdit
+                        store={this.props.store}
+                        book={this.props.book}
+                        close={this.toggleModal}
+                    />
+                    }
+                    { this.state.deleteModal &&
+                    <BookDelete
+                        store={this.props.store}
+                        book={this.props.book}
+                        close={this.toggleDeleteModal}
+                    />
+                    }
+                </div>
+                <style jsx>{`
+                    .wrap {
+                        display: flex;
+                        border-bottom: 1px solid black;
+                    }
 
-                img {
-                float: left;
-                width: 98px;
-                height: 150px;
-                margin-right: ${ spacing.margins };
-                }
-
-            `}</style>
-        </div>
-    );
-  }
+                    img {
+                        float: left;
+                    }
+                `}</style>
+            </div>
+        );
+    }
 }

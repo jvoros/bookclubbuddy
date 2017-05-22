@@ -1,66 +1,70 @@
-import * as moment from "moment";
 import * as React from "react";
 
+// App components
+import Book from "../store/Book";
+import BookStore from "../store/BookStore";
+import Modal from "./Modal";
 import { colors, spacing } from "./Theme";
 
-import IBook from "../types/book";
+import { IBook } from "../types/interfaces";
 
 interface IProps {
-  book: IBook;
-  savePress(): any;
+    store: BookStore;
+    book: Book;
+    close(): void;
 }
 
 interface IState {
-    title: string;
-    clubDate?: string;
-    pages?: number;
-    image?: string;
+    changedbook: IBook;
 }
 
-export default class BookDetail extends React.PureComponent<IProps, IState> {
+export default class BookEdit extends React.Component<IProps, IState> {
     constructor(props) {
-    super(props);
-    this.state = { ...this.props.book };
-  }
+        super(props);
+        this.state = {
+            changedbook: {
+                title: this.props.book.title,
+                pages: this.props.book.pages,
+                clubDate: this.props.book.clubDate,
+                image: this.props.book.image,
+             },
+        };
+    }
 
-  handleChange = (e) => {
-      this.setState({ [e.target.name]: e.target.value });
-  }
+    saveBook = () => {
+        this.props.book.updateBook(this.state.changedbook);
+        this.props.store.saveBook(this.props.book);
+        this.props.close();
+    }
 
-  handleSave = () => {
-      const a = 1;
-  }
+    handleChange = (e) => {
+        this.setState({ changedbook: { ...this.state.changedbook, [e.target.name]: e.target.value }});
+    }
 
-  render() {
-    return (
-        <div>
-            { this.state.title }<br />
-            { this.state.clubDate }
-            <img src={this.props.book.image} />
-            <form>
-                <label>
-                    Title:
-                    <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
-                </label>
-                <label>
-                    Book Club Date:
-                    <input type="text" name="clubDate" value={this.state.clubDate} onChange={this.handleChange}/>
-                </label>
-                <input type="submit" value="Save" onClick={this.props.savePress} />
-            </form>
-            <style jsx>{`
-                h2 {
-                color: ${ colors.primary };
-                }
+    render() {
+        return (
+           <Modal title="Add/Edit">
+                <form>
+                    <label>title: </label>
+                    <input type="text" name="title"
+                    value={this.state.changedbook.title} onChange={this.handleChange} />
 
-                img {
-                float: left;
-                width: 98px;
-                height: 150px;
-                margin-right: ${ spacing.margins };
+                    <label>pages: </label>
+                    <input type="number" size={5} name="pages"
+                    value={this.state.changedbook.pages}  onChange={this.handleChange} />
+
+                    <label>book club date: </label>
+                    <input type="text" size={10} name="clubDate"
+                    value={this.state.changedbook.clubDate} onChange={this.handleChange} />
+                </form>
+                <button onClick={this.saveBook}>SAVE</button>
+                <button onClick={this.props.close}>CLOSE</button>
+                <style jsx>{`
+                input {
+                    display: block;
                 }
             `}</style>
-        </div>
-    );
-  }
+        </Modal>
+        );
+    }
 }

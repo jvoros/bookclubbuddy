@@ -1,8 +1,12 @@
 interface IBook {
+    id?: string;
     title: string;
-    pages: number;
+    pages?: number;
     clubDate?: string;
     image?: string;
 }
 
-export default IBook;
+export {
+    IBook,
+};
+
