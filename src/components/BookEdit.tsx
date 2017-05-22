@@ -26,6 +26,7 @@ export default class BookEdit extends React.Component<IProps, IState> {
             changedbook: {
                 title: this.props.book.title,
                 pages: this.props.book.pages,
+                currentPage: this.props.book.currentPage,
                 clubDate: this.props.book.clubDate,
                 image: this.props.book.image,
              },
@@ -54,9 +55,17 @@ export default class BookEdit extends React.Component<IProps, IState> {
                     <input type="number" size={5} name="pages"
                     value={this.state.changedbook.pages}  onChange={this.handleChange} />
 
+                    <label>Current Page: </label>
+                    <input type="number" size={5} name="currentPage"
+                    value={this.state.changedbook.currentPage}  onChange={this.handleChange} />
+
                     <label>book club date: </label>
                     <input type="text" size={10} name="clubDate"
                     value={this.state.changedbook.clubDate} onChange={this.handleChange} />
+
+                    <label>image: </label>
+                    <input type="text" name="image"
+                    value={this.state.changedbook.image} onChange={this.handleChange} />
                 </form>
                 <button onClick={this.saveBook}>SAVE</button>
                 <button onClick={this.props.close}>CLOSE</button>

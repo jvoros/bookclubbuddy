@@ -19,7 +19,7 @@ export default (props: IProps) => (
         </div>
         <style jsx>{`
         .fade {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -28,8 +28,8 @@ export default (props: IProps) => (
         }
 
         .modal {
-            width: 90%;
-            margin: 20px auto;
+            max-width: 700px;
+            margin: 40px auto;
             padding: ${ spacing.padding };
             background-color: white;
         }

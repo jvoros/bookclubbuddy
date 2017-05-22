@@ -5,6 +5,7 @@ import * as React from "react";
 import BookDetail from "./components/BookDetail";
 import BookEdit from "./components/BookEdit";
 import Header from "./components/Header";
+import { colors, spacing } from "./components/Theme";
 import Book from "./store/Book";
 import BookStore from "./store/BookStore";
 
@@ -39,8 +40,7 @@ export default class App extends React.Component<{store: BookStore}, IState> {
         return (
             <div>
                 <Header
-                    title="Bookclub Buddy"
-                    subtitle="this is awesome"
+                    title="Book Club Buddy"
                 />
                 {bookList}
                 { this.state.modal &&
@@ -52,6 +52,13 @@ export default class App extends React.Component<{store: BookStore}, IState> {
                 />
                 }
                 <button onClick={this.handleAdd}>+ Add Book</button>
+                <style jsx>{`
+                    div {
+                        max-width: 700px;
+                        margin: 0 auto;
+                        padding: ${ spacing.padding };
+                    }
+                `}</style>
             </div>
         );
     }

@@ -4,7 +4,7 @@ import * as ReactDOM from "react-dom";
 
 // Static components
 import "normalize.css";
-import "./assets/images/favicon.ico";
+// import "./assets/images/favicon.ico";
 import "./index.html";
 
 // App components

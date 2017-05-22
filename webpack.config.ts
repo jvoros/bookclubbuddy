@@ -43,7 +43,7 @@ module.exports = {
                 loader: ["file-loader?name=[name].[ext]", "extract-loader", "html-loader"],
             },
             {
-                test: /\.(jpg|jpeg|gif|png)$/,
+                test: /\.(jpg|jpeg|gif|png|svg)$/,
                 exclude: /node_modules/,
                 loader: "file-loader?name=[path][name].[ext]",
             },

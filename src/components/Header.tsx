@@ -1,6 +1,8 @@
 import * as React from "react";
 
+import "../assets/images/logo.svg";
 import { colors, spacing } from "./Theme";
+
 
 interface IProps {
     title: string;
@@ -9,21 +11,28 @@ interface IProps {
 
 export default (props: IProps) => (
     <div>
-        <h1>{ props.title }</h1>
-        <span className="subtitle">{ props.subtitle }</span>
+        <img src="/assets/images/logo.svg" alt={props.title} />
         <style jsx>{`
             div {
                 padding: ${ spacing.padding };
-                background-color: ${ colors.primary };
-                color: ${ colors.primary_text };
+                text-align: center;
             }
 
             h1 {
-                margin: 0;
+                margin: 20px auto;
+                text-align: center;
+                font-family: "Shadows Into Light Two", serif;
+                font-weight: normal;
+                font-size: 48px;
+                // color: ${ colors.primary };
             }
 
             .subtitle {
                 color: ${ colors.primary_light };
+            }
+
+            img {
+                width: 50%;
             }
         `}</style>
     </div>
