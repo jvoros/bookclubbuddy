@@ -16,6 +16,7 @@ export default (props: IProps) => (
             div {
                 padding: ${ spacing.padding };
                 text-align: center;
+                margin: 30px 0;
             }
 
             h1 {
@@ -24,7 +25,6 @@ export default (props: IProps) => (
                 font-family: "Shadows Into Light Two", serif;
                 font-weight: normal;
                 font-size: 48px;
-                // color: ${ colors.primary };
             }
 
             .subtitle {

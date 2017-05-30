@@ -4,6 +4,7 @@ import * as React from "react";
 // App components
 import BookDetail from "./components/BookDetail";
 import BookEdit from "./components/BookEdit";
+import Button from "./components/Button";
 import Header from "./components/Header";
 import { colors, spacing } from "./components/Theme";
 import Book from "./store/Book";
@@ -51,7 +52,7 @@ export default class App extends React.Component<{store: BookStore}, IState> {
                     title="Add a Book"
                 />
                 }
-                <button onClick={this.handleAdd}>+ Add Book</button>
+                <Button onClick={this.handleAdd}>+ Add Book</Button>
                 <style jsx>{`
                     div {
                         max-width: 700px;

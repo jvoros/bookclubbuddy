@@ -3,6 +3,7 @@ import * as React from "react";
 // App components
 import Book from "../store/Book";
 import BookStore from "../store/BookStore";
+import Button from "./Button";
 import Modal from "./Modal";
 import { colors, spacing } from "./Theme";
 
@@ -45,14 +46,14 @@ export default class BookEdit extends React.Component<IProps, IState> {
 
     render() {
         return (
-           <Modal title={this.props.title}>
+           <Modal title={this.props.title} close={this.props.close}>
                 <form>
                     <label>title: </label>
-                    <input type="text" name="title"
+                    <input type="text" name="title" id="title"
                     value={this.state.changedbook.title} onChange={this.handleChange} />
 
                     <label>pages: </label>
-                    <input type="number" size={5} name="pages"
+                    <input type="number" name="pages"
                     value={this.state.changedbook.pages}  onChange={this.handleChange} />
 
                     <label>Current Page: </label>
@@ -67,11 +68,38 @@ export default class BookEdit extends React.Component<IProps, IState> {
                     <input type="text" name="image"
                     value={this.state.changedbook.image} onChange={this.handleChange} />
                 </form>
-                <button onClick={this.saveBook}>SAVE</button>
-                <button onClick={this.props.close}>CLOSE</button>
+                <Button options={["small"]}>
+                    <i className="fa fa-search" aria-hidden="true"></i> Search Goodreads for cover...
+                </Button>
+                <br />
+                <img src={this.state.changedbook.image} />
+                <br />
+                <Button options={["small"]} onClick={this.saveBook}>
+                    <i className="fa fa-check" aria-hidden="true"></i> SAVE
+                </Button>
+                <Button options={["small"]} onClick={this.props.close}>
+                    <i className="fa fa-times" aria-hidden="true"></i> CLOSE
+                </Button>
                 <style jsx>{`
+                label {
+                    color: ${ colors.primary_dark };
+                }
+
                 input {
                     display: block;
+                    margin: ${ spacing.margins } 0;
+                    border: 0;
+                    border-bottom: 1px solid ${ colors.primary_dark };
+                    font-size: 20px;
+                }
+
+                #title {
+                    width: 90%;
+                }
+
+                img {
+                    max-width: 150px;
+                    margin: ${ spacing.margins };
                 }
             `}</style>
         </Modal>

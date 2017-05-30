@@ -4,6 +4,7 @@ import Book from "../store/Book";
 import BookStore from "../store/BookStore";
 import BookDelete from "./BookDelete";
 import BookEdit from "./BookEdit";
+import Button from "./Button";
 
 import { colors, spacing } from "./Theme";
 
@@ -33,15 +34,26 @@ export default class BookDetail extends React.Component<IProps, { modal?: boolea
                 <div><img src={this.props.book.image} /></div>
                 <div className="details">
                     <h1>{this.props.book.title}</h1>
-                    <p><b>{this.props.book.clubDate}</b></p>
-                    <p><b>Current page</b>: {this.props.book.currentPage}</p>
-                    <p><b>{this.props.book.ppd}</b> pages per day</p>
-                    <button onClick={this.toggleModal}>Edit</button>
-                    <button onClick={this.toggleDeleteModal}>Delete</button>
-                </div>
-                <div className="ppd">
-                    <h1>{this.props.book.ppd}</h1>
-                    <div>pages per day</div>
+                    <ul className="meta">
+                        <li>
+                            <i className="fa fa-calendar-o" aria-hidden="true"></i> {this.props.book.clubDate}
+                        </li>
+                        <li>
+                            <i className="fa fa-book" aria-hidden="true"></i> Pages read:&nbsp;
+                            <b>{this.props.book.currentPage}</b>
+                        </li>
+                    </ul>
+                    <div className="ppd">
+                        <b>{this.props.book.ppd}</b> pages per day
+                    </div>
+                    <div>
+                        <Button options={["small"]} onClick={this.toggleModal}>
+                            <i className="fa fa-pencil" aria-hidden="true"></i> Edit
+                        </Button>
+                        <Button options={["small"]} onClick={this.toggleDeleteModal}>
+                            <i className="fa fa-trash" aria-hidden="true"></i>
+                        </Button>
+                    </div>
                 </div>
                 { this.state.modal &&
                     <BookEdit
@@ -63,36 +75,50 @@ export default class BookDetail extends React.Component<IProps, { modal?: boolea
                         display: flex;
                         margin: ${ spacing.margins } 0;
                         padding: ${ spacing.padding };
+                        min-height: 230px;
                         background-color: white;
                         border: 1px solid ${ colors.borders };
-                        box-shadow: 0px 1px 12px 1px rgba(0,0,0,0.22);
+                        // box-shadow: 0px 1px 12px 1px rgba(0,0,0,0.22);
                         border-radius: 2px;
                     }
 
                     img {
                         max-width: 150px;
-                        margin-right: ${ spacing.margins };
+                        margin: 0 ${ spacing.margins } 0 0;
                     }
 
                     .details {
+                        display: flex;
+                        flex-flow: column nowrap;
                         flex-grow: 1;
                     }
 
+                    h1 {
+                        width: 100%;
+                        font-weight: lighter;
+                        font-size: 36px;
+                        margin: 0 0 ${ spacing.margins } 0;
+
+                    }
+
+                    .meta {
+                        margin: 0;
+                        display: inline;
+                        padding: 0;
+                    }
+
                     .ppd {
-                        display: flex;
-                        flex-flow: column nowrap;
-                        justify-content: center;
-                        width: 150px;
-                        background: ${ colors.primary };
-                        color: ${ colors.primary_text };
+                        flex-grow: 1;
+                        font-size: 30px;
+                        font-weight: lighter;
+                        color: ${ colors.primary };
+                        padding-top: 30px;
                         text-align: center;
                     }
 
-                    .ppd h1 {
-                        font-family: "Shadows Into Light Two", serif;
-                        font-size: 80px;
-                        font-weight: normal;
-                        margin: ${ spacing.margins };
+                    li {
+                        display: inline;
+                        padding: 0 20px 0 0;
                     }
                 `}</style>
             </div>

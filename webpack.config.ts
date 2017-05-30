@@ -43,7 +43,7 @@ module.exports = {
                 loader: ["file-loader?name=[name].[ext]", "extract-loader", "html-loader"],
             },
             {
-                test: /\.(jpg|jpeg|gif|png|svg)$/,
+                test: /\.(jpg|jpeg|gif|png)$/,
                 exclude: /node_modules/,
                 loader: "file-loader?name=[path][name].[ext]",
             },
@@ -55,6 +55,10 @@ module.exports = {
                 // put favicon in root
                 test: /favicon\.ico$/,
                 use: "file-loader?name=favicon.ico",
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: "file-loader?name=[path][name].[ext]",
             },
         ],
     },
