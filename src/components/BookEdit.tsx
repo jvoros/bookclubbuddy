@@ -1,6 +1,7 @@
 import * as React from "react";
 
 // App components
+import key from "../../const";
 import Book from "../store/Book";
 import BookStore from "../store/BookStore";
 import Button from "./Button";
@@ -32,6 +33,7 @@ export default class BookEdit extends React.Component<IProps, IState> {
                 image: this.props.book.image,
              },
         };
+        console.log(key);
     }
 
     saveBook = () => {
